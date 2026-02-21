@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One who added Magic in my life.</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: url('background.jpg') no-repeat center center/cover;
+    animation: slowZoom 30s infinite alternate ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background zoom */
+@keyframes slowZoom {
+    from { background-size: 100%; }
+    to { background-size: 110%; }
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+    z-index: 0;
+}
+
+/* Stars */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* Message Box */
+.message-box {
+    position: absolute;
+    background: rgba(0,0,0,0.85);
+    padding: 5vw;
+    border-radius: 25px;
+    color: white;
+    font-size: clamp(18px, 4vw, 30px);
+    text-align: center;
+    width: 85%;
+    max-width: 800px;
+    opacity: 0;
+    z-index: 3;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    text-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+/* Motion */
+.from-left { transform: translateX(-120px) rotate(-4deg); }
+.from-right { transform: translateX(120px) rotate(4deg); }
+
+.message-box.show {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+    transition: all 1.5s cubic-bezier(.77,0,.18,1);
+}
+
+/* Fully Responsive Centered Photo Section */
+.photo-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    text-align: center;
+    z-index: 3;
+    opacity: 0;
+    width: 90%;
+    max-width: 500px;
+    transition: all 1.4s cubic-bezier(.68,-0.6,.32,1.6);
+}
+
+.photo-section.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Text above photo */
+.photo-text {
+    display: inline-block;
+    padding: 12px 25px;
+    background: rgba(0,0,0,0.85);
+    border-radius: 25px;
+    color: white;
+    font-size: clamp(16px, 4vw, 26px);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    animation: floatText 4s infinite ease-in-out;
+}
+
+@keyframes floatText {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+/* Circular Image */
+.circle-frame {
+    width: clamp(180px, 60vw, 320px);
+    height: clamp(180px, 60vw, 320px);
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    box-shadow: 0 0 35px rgba(255,255,255,0.6);
+    animation: glowRing 4s infinite ease-in-out;
+}
+
+.circle-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 1.6s ease;
+}
+
+.photo-section.show .circle-frame img {
+    clip-path: circle(75% at 50% 50%);
+}
+
+@keyframes glowRing {
+    0% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+    50% { box-shadow: 0 0 50px rgba(255,255,255,0.9); }
+    100% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+<div class="stars" id="stars"></div>
+
+<div class="message-box from-left" id="message1">
+Thank you for being an amazing teacher.<br>
+Because of you, I believe in myself.
+</div>
+
+<div class="photo-section" id="photoSection">
+    <div class="photo-text">
+        Thank you for helping me grow 🌱
+    </div>
+    <div class="circle-frame">
+        <img src="teacher_student.jpg" alt="Teacher and Student">
+    </div>
+</div>
+
+<div class="message-box from-right" id="message2">
+When I doubted myself, you saw potential.<br>
+Thank you ma’am for adding magic to my life ❤️😊
+</div>
+
+<script>
+const message1 = document.getElementById("message1");
+const message2 = document.getElementById("message2");
+const photoSection = document.getElementById("photoSection");
+const starsContainer = document.getElementById("stars");
+
+/* Generate stars */
+for (let i = 0; i < 80; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.style.top = Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    starsContainer.appendChild(star);
+}
+
+/* Timeline */
+setTimeout(() => message1.classList.add("show"), 1000);
+setTimeout(() => message1.classList.remove("show"), 6000);
+
+setTimeout(() => photoSection.classList.add("show"), 7500);
+setTimeout(() => photoSection.classList.remove("show"), 13000);
+
+setTimeout(() => message2.classList.add("show"), 14500);
+</script>
+
+</body>
+</html>

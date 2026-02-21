@@ -1,0 +1,55 @@
+/* Photo Section (Fully Responsive Centered) */
+.photo-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    text-align: center;
+    z-index: 3;
+    opacity: 0;
+    width: 90%;
+    max-width: 500px;
+    transition: all 1.4s cubic-bezier(.68,-0.6,.32,1.6);
+}
+
+.photo-section.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Text above photo */
+.photo-text {
+    display: inline-block;
+    padding: 12px 25px;
+    background: rgba(0,0,0,0.85);
+    border-radius: 25px;
+    color: white;
+    font-size: clamp(16px, 4vw, 26px);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    animation: floatText 4s infinite ease-in-out;
+}
+
+/* Circular Image */
+.circle-frame {
+    width: clamp(180px, 60vw, 320px);
+    height: clamp(180px, 60vw, 320px);
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    box-shadow: 0 0 35px rgba(255,255,255,0.6);
+    animation: glowRing 4s infinite ease-in-out;
+}
+
+.circle-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 1.6s ease;
+}
+
+.photo-section.show .circle-frame img {
+    clip-path: circle(75% at 50% 50%);
+}
